@@ -14,4 +14,4 @@ async function consultaCep(cep) {
 }
 
 
-consultaCep("08575270");
+consultaCep("08575271");
