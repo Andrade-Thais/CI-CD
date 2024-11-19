@@ -13,5 +13,5 @@ async function consultaCep(cep) {
   }
 }
 
-
-consultaCep("08575270");
+// Testando o script
+consultaCep("01001000");
