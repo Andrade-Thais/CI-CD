@@ -1,26 +1,36 @@
-name: Pipeline para Consultar de CEP - CI/CD
+name: Teste com Mocha - PIPELINE
 
 on:
   push:
     branches:
       - main
       - exercicios
+  pull_request:
+    branches:
+      - main
+      - exercicios
 
 jobs:
-  consulta-cep:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Configurar o repositório
-      uses: actions/checkout@v3
+      - name: Checkout do código
+        uses: actions/checkout@v3
 
-    - name: Configurar Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 16
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
-    - name: Instalar dependências
-      run: npm install
+      - name: Instalar dependências
+        run: npm install
 
-    - name: Executar script de consulta ao ViaCep
-      run: node caminho/do/seu/script.js
+      - name: Garantir permissões de execução para Mocha
+        run: chmod +x ./node_modules/.bin/mocha
+
+      - name: Verificar o caminho do Mocha
+        run: ls -l ./node_modules/.bin/mocha
+
+      - name: Rodar os testes com Mocha
+        run: npx mocha
